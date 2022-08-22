@@ -3,6 +3,8 @@ import React, { useState } from "react";
 export default function MovieSearch() {
     const [query, setQuery] = useState('');
 
+    const[movies, setMovies] = useState([]);
+
 
   const searchMovies = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -12,7 +14,8 @@ export default function MovieSearch() {
     try {
       const res = await fetch(url);
       const data = await res.json();
-      console.log(data);
+      console.log(data.results);
+      setMovies(data.results);
     } catch (err) {
       console.error(err);
     }
